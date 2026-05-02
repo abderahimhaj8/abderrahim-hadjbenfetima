@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>رحيم - لبرمجة ونسخ مفاتيح السيارات</title>
+    <title id="page-title">رحيم - لبرمجة ونسخ مفاتيح السيارات</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -14,8 +14,8 @@
     <!-- QRCode.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     
-    <!-- Google Fonts (Tajawal for Arabic) -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts (Tajawal for Arabic & Poppins for French) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -23,6 +23,7 @@
                 extend: {
                     fontFamily: {
                         sans: ['Tajawal', 'sans-serif'],
+                        fr: ['Poppins', 'sans-serif'],
                     },
                     colors: {
                         gold: {
@@ -71,7 +72,6 @@
 
         .social-btn {
             transition: all 0.3s ease;
-            text-align: right;
         }
         
         .social-btn:hover {
@@ -92,20 +92,37 @@
             width: 0px;
             background: transparent;
         }
+        
+        /* Font switching based on lang */
+        html[lang="fr"] body {
+            font-family: 'Poppins', sans-serif;
+        }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 antialiased">
+<body class="min-h-screen flex items-center justify-center p-4 antialiased relative transition-all duration-300">
 
     <!-- Main Container -->
-    <div class="glass-card w-full max-w-md rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+    <div class="glass-card w-full max-w-md rounded-3xl p-8 shadow-2xl relative overflow-hidden transition-all duration-300">
         
+        <!-- زر QR Code -->
+        <button onclick="openQRModal()" title="عرض رمز QR" class="absolute top-5 left-5 z-30 px-4 py-2 rounded-full bg-white/10 hover:bg-gold-500/20 border border-white/20 hover:border-gold-500/50 flex items-center justify-center gap-2 text-white hover:text-gold-400 transition-all shadow-lg hover:scale-105">
+            <i class="fa-solid fa-qrcode text-lg"></i>
+            <span id="qr-btn-text" class="text-xs font-bold mt-0.5">شارك البطاقة</span>
+        </button>
+
+        <!-- زر تغيير اللغة -->
+        <button onclick="toggleLanguage()" title="تغيير اللغة" class="absolute top-5 right-5 z-30 px-4 py-2 rounded-full bg-white/10 hover:bg-blue-500/20 border border-white/20 hover:border-blue-500/50 flex items-center justify-center gap-2 text-white hover:text-blue-400 transition-all shadow-lg hover:scale-105">
+            <i class="fa-solid fa-globe text-lg"></i>
+            <span id="lang-toggle-text" class="text-xs font-bold mt-0.5" style="font-family: 'Poppins', sans-serif;">FR</span>
+        </button>
+
         <!-- Decorative Background Elements -->
         <div class="absolute top-0 right-0 -mr-16 -mt-16 w-32 h-32 rounded-full bg-gold-500 opacity-30 blur-3xl"></div>
         <div class="absolute bottom-0 left-0 -ml-16 -mb-16 w-40 h-40 rounded-full bg-blue-600 opacity-30 blur-3xl"></div>
         <div class="absolute top-1/2 left-1/4 w-32 h-32 rounded-full bg-purple-600 opacity-20 blur-3xl"></div>
 
         <!-- Logo Section -->
-        <div class="flex flex-col items-center relative z-10">
+        <div class="flex flex-col items-center relative z-10 mt-6">
             <!-- Custom Logo from User's Identity (Dark Mode Version) -->
             <div class="w-32 h-32 rounded-full border-2 border-gold-500 flex items-center justify-center bg-gray-900 shadow-lg animate-pulse-glow mb-4 p-3">
                 <svg viewBox="65 30 260 260" class="w-full h-full animate-float drop-shadow-md" xmlns="http://www.w3.org/2000/svg">
@@ -127,10 +144,10 @@
                 </svg>
             </div>
             
-            <h1 class="text-3xl font-bold text-white mb-1">رحيم للمفاتيح</h1>
+            <h1 id="main-title" class="text-3xl font-bold text-white mb-1">رحيم للمفاتيح</h1>
             <p class="text-gold-400 text-sm font-medium mb-2 tracking-wide">RAHIM KEY</p>
-            <p class="text-gray-400 text-center text-sm leading-relaxed mb-5 px-4">
-                خبير في نسخ، برمجة، وإصلاح جميع أنواع مفاتيح السيارات الذكية والمشفرة.
+            <p id="desc-text" class="text-slate-200 text-center text-sm md:text-base leading-relaxed mb-5 px-5 py-3 bg-white/5 rounded-2xl border border-white/10 shadow-sm backdrop-blur-sm">
+                خبير في <span class="text-gold-400 font-bold">نسخ</span>، <span class="text-gold-400 font-bold">برمجة</span>، وإصلاح جميع أنواع مفاتيح السيارات <span class="text-blue-300 font-bold">الذكية والمشفرة</span>.
             </p>
 
             <!-- Quick Action Circular Buttons -->
@@ -140,7 +157,7 @@
                     <a href="tel:0559695891" title="اتصل بنا" class="circle-btn w-14 h-14 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-500 hover:bg-gold-500 hover:text-white shadow-lg hover:shadow-gold-500/40">
                         <i class="fa-solid fa-phone text-2xl"></i>
                     </a>
-                    <span class="text-xs text-gray-300 font-medium">اتصل بنا</span>
+                    <span id="call-btn-text" class="text-xs text-gray-300 font-medium">اتصل بنا</span>
                 </div>
 
                 <!-- Save Contact -->
@@ -148,7 +165,7 @@
                     <button onclick="downloadVCard()" title="حفظ الرقم في الهاتف" class="circle-btn w-14 h-14 rounded-full bg-teal-500/10 border border-teal-500/30 flex items-center justify-center text-teal-500 hover:bg-teal-500 hover:text-white shadow-lg hover:shadow-teal-500/40">
                         <i class="fa-solid fa-user-plus text-xl"></i>
                     </button>
-                    <span class="text-xs text-gray-300 font-medium">احفظ الرقم</span>
+                    <span id="save-btn-text" class="text-xs text-gray-300 font-medium">احفظ الرقم</span>
                 </div>
 
                 <!-- WhatsApp -->
@@ -156,73 +173,145 @@
                     <a href="https://wa.me/213559695891" target="_blank" title="مراسلة عبر واتساب" class="circle-btn w-14 h-14 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-white shadow-lg hover:shadow-green-500/40">
                         <i class="fa-brands fa-whatsapp text-3xl"></i>
                     </a>
-                    <span class="text-xs text-gray-300 font-medium">واتساب</span>
+                    <span id="wa-btn-text" class="text-xs text-gray-300 font-medium">واتساب</span>
                 </div>
             </div>
         </div>
 
-        <!-- Action Buttons (Links) -->
-        <div class="space-y-4 relative z-10">
+        <!-- Action Buttons (2x2 Grid) -->
+        <div class="grid grid-cols-2 gap-4 relative z-10">
             <!-- Facebook -->
-            <a href="https://web.facebook.com/profile.php?id=100063619398517&locale=fr_FR" target="_blank" class="social-btn flex items-center justify-between w-full p-4 rounded-xl bg-blue-500/10 border border-blue-500/30 hover:bg-blue-500/20 hover:border-blue-500 group text-white">
-                <div class="flex items-center gap-4">
-                    <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/30">
-                        <i class="fa-brands fa-facebook-f text-xl"></i>
-                    </div>
-                    <span class="font-semibold text-lg text-blue-50 group-hover:text-white transition-colors">صفحتنا على فيسبوك</span>
+            <a href="https://web.facebook.com/profile.php?id=100063619398517&locale=fr_FR" target="_blank" class="social-btn flex flex-col items-center justify-center gap-3 p-4 rounded-2xl bg-blue-500/10 border border-blue-500/30 hover:bg-blue-500/20 hover:border-blue-500 group text-white text-center">
+                <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/30">
+                    <i class="fa-brands fa-facebook-f text-2xl"></i>
                 </div>
-                <i class="fa-solid fa-chevron-left text-blue-400 group-hover:text-blue-300 transition-colors"></i>
+                <span id="fb-btn-text" class="font-bold text-sm text-blue-50 group-hover:text-white transition-colors">فيسبوك</span>
             </a>
 
             <!-- Instagram -->
-            <a href="https://www.instagram.com/programation_cle_auto/" target="_blank" class="social-btn flex items-center justify-between w-full p-4 rounded-xl bg-fuchsia-500/10 border border-fuchsia-500/30 hover:bg-fuchsia-500/20 hover:border-fuchsia-500 group text-white">
-                <div class="flex items-center gap-4">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-fuchsia-500/30">
-                        <i class="fa-brands fa-instagram text-xl"></i>
-                    </div>
-                    <span class="font-semibold text-lg text-fuchsia-50 group-hover:text-white transition-colors">تابعنا على إنستغرام</span>
+            <a href="https://www.instagram.com/programation_cle_auto/" target="_blank" class="social-btn flex flex-col items-center justify-center gap-3 p-4 rounded-2xl bg-fuchsia-500/10 border border-fuchsia-500/30 hover:bg-fuchsia-500/20 hover:border-fuchsia-500 group text-white text-center">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-fuchsia-500/30">
+                    <i class="fa-brands fa-instagram text-2xl"></i>
                 </div>
-                <i class="fa-solid fa-chevron-left text-fuchsia-400 group-hover:text-fuchsia-300 transition-colors"></i>
+                <span id="ig-btn-text" class="font-bold text-sm text-fuchsia-50 group-hover:text-white transition-colors">إنستغرام</span>
             </a>
 
             <!-- TikTok -->
-            <a href="https://www.tiktok.com/@rahim_key?_r=1&_t=ZS-95ugPeCr9ph" target="_blank" class="social-btn flex items-center justify-between w-full p-4 rounded-xl bg-pink-500/10 border border-pink-500/30 hover:bg-pink-500/20 hover:border-pink-500 group text-white">
-                <div class="flex items-center gap-4">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-pink-500 flex items-center justify-center text-white shadow-lg shadow-pink-500/30">
-                        <i class="fa-brands fa-tiktok text-xl"></i>
-                    </div>
-                    <span class="font-semibold text-lg text-pink-50 group-hover:text-white transition-colors">تابعنا على تيك توك</span>
+            <a href="https://www.tiktok.com/@rahim_key?_r=1&_t=ZS-95ugPeCr9ph" target="_blank" class="social-btn flex flex-col items-center justify-center gap-3 p-4 rounded-2xl bg-pink-500/10 border border-pink-500/30 hover:bg-pink-500/20 hover:border-pink-500 group text-white text-center">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500 to-pink-500 flex items-center justify-center text-white shadow-lg shadow-pink-500/30">
+                    <i class="fa-brands fa-tiktok text-2xl"></i>
                 </div>
-                <i class="fa-solid fa-chevron-left text-pink-400 group-hover:text-pink-300 transition-colors"></i>
+                <span id="tt-btn-text" class="font-bold text-sm text-pink-50 group-hover:text-white transition-colors">تيك توك</span>
             </a>
 
             <!-- GPS Location -->
-            <a href="https://maps.app.goo.gl/vEGoAhwDB3a4mtoaA" target="_blank" class="social-btn flex items-center justify-between w-full p-4 rounded-xl bg-red-500/10 border border-red-500/30 hover:bg-red-500/20 hover:border-red-500 group text-white">
-                <div class="flex items-center gap-4">
-                    <div class="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center text-white shadow-lg shadow-red-500/30">
-                        <i class="fa-solid fa-location-dot text-xl"></i>
-                    </div>
-                    <span class="font-semibold text-lg text-red-50 group-hover:text-white transition-colors">موقع المحل (GPS)</span>
+            <a href="https://maps.app.goo.gl/vEGoAhwDB3a4mtoaA" target="_blank" class="social-btn flex flex-col items-center justify-center gap-3 p-4 rounded-2xl bg-red-500/10 border border-red-500/30 hover:bg-red-500/20 hover:border-red-500 group text-white text-center">
+                <div class="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center text-white shadow-lg shadow-red-500/30">
+                    <i class="fa-solid fa-location-dot text-2xl"></i>
                 </div>
-                <i class="fa-solid fa-chevron-left text-red-400 group-hover:text-red-300 transition-colors"></i>
+                <span id="gps-btn-text" class="font-bold text-sm text-red-50 group-hover:text-white transition-colors">الموقع (GPS)</span>
             </a>
-        </div>
-
-        <!-- Divider -->
-        <div class="my-8 border-t border-gray-700 relative z-10">
-            <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#0f172a] px-3 text-xs text-gray-500">شارك البطاقة</span>
-        </div>
-
-        <!-- QR Code Section -->
-        <div class="flex flex-col items-center justify-center relative z-10">
-            <div class="bg-white p-3 rounded-xl shadow-lg border-2 border-gold-500 mb-3" id="qrcode"></div>
-            <p class="text-xs text-gray-400 text-center">امسح الرمز ضوئياً للوصول إلى هذه البطاقة</p>
         </div>
 
     </div>
 
+    <!-- QR Code Modal Overlay -->
+    <div id="qrModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-slate-950/80 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <!-- Modal Content -->
+        <div id="qrModalContent" class="glass-card bg-[#0f172a] border border-gray-700 p-8 rounded-3xl shadow-2xl relative transform scale-95 transition-transform duration-300 max-w-sm w-[90%] flex flex-col items-center">
+            
+            <!-- Close Button -->
+            <button onclick="closeQRModal()" class="absolute top-4 left-4 w-8 h-8 flex items-center justify-center rounded-full bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="w-12 h-12 rounded-full bg-gold-500/20 flex items-center justify-center text-gold-500 mb-4">
+                <i class="fa-solid fa-qrcode text-2xl"></i>
+            </div>
+            
+            <h3 id="modal-title" class="text-white text-xl font-bold mb-6 text-center">شارك البطاقة</h3>
+            
+            <!-- QR Code Container -->
+            <div class="bg-white p-4 rounded-xl shadow-lg border-2 border-gold-500 mb-4" id="qrcode"></div>
+            
+            <p id="modal-desc" class="text-sm text-gray-400 text-center mt-2">امسح الرمز ضوئياً للوصول إلى هذه البطاقة</p>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script>
+        // Language Data Dictionary
+        const translations = {
+            ar: {
+                pageTitle: "رحيم - لبرمجة ونسخ مفاتيح السيارات",
+                qrBtn: "شارك البطاقة",
+                mainTitle: "رحيم للمفاتيح",
+                desc: "خبير في <span class='text-gold-400 font-bold'>نسخ</span>، <span class='text-gold-400 font-bold'>برمجة</span>، وإصلاح جميع أنواع مفاتيح السيارات <span class='text-blue-300 font-bold'>الذكية والمشفرة</span>.",
+                callBtn: "اتصل بنا",
+                saveBtn: "احفظ الرقم",
+                waBtn: "واتساب",
+                fbBtn: "فيسبوك",
+                igBtn: "إنستغرام",
+                ttBtn: "تيك توك",
+                gpsBtn: "الموقع (GPS)",
+                modalTitle: "شارك البطاقة",
+                modalDesc: "امسح الرمز ضوئياً للوصول إلى هذه البطاقة",
+                langToggleText: "FR",
+                vcardTitle: "خبير برمجة ونسخ مفاتيح السيارات",
+                vcardNote: "خبير في نسخ، برمجة، وإصلاح جميع أنواع مفاتيح السيارات الذكية والمشفرة."
+            },
+            fr: {
+                pageTitle: "Rahim - Programmation et copie de clés auto",
+                qrBtn: "Partager",
+                mainTitle: "Rahim Clés",
+                desc: "Expert en <span class='text-gold-400 font-bold'>copie</span>, <span class='text-gold-400 font-bold'>programmation</span>, et réparation de tous types de clés de voitures <span class='text-blue-300 font-bold'>intelligentes et codées</span>.",
+                callBtn: "Appeler",
+                saveBtn: "Enregistrer",
+                waBtn: "WhatsApp",
+                fbBtn: "Facebook",
+                igBtn: "Instagram",
+                ttBtn: "TikTok",
+                gpsBtn: "Localisation (GPS)",
+                modalTitle: "Partager la carte",
+                modalDesc: "Scannez le code pour accéder à cette carte",
+                langToggleText: "عربي",
+                vcardTitle: "Expert en programmation et copie de clés auto",
+                vcardNote: "Expert en copie, programmation et réparation de tous types de clés de voitures intelligentes et codées."
+            }
+        };
+
+        let currentLang = 'ar';
+
+        // Language Toggle Function
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'fr' : 'ar';
+            
+            // Update HTML Lang & Dir attributes
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+
+            // Update Texts
+            document.getElementById('page-title').innerText = translations[currentLang].pageTitle;
+            document.getElementById('qr-btn-text').innerText = translations[currentLang].qrBtn;
+            document.getElementById('main-title').innerText = translations[currentLang].mainTitle;
+            document.getElementById('desc-text').innerHTML = translations[currentLang].desc; // innerHTML to keep styling spans
+            document.getElementById('call-btn-text').innerText = translations[currentLang].callBtn;
+            document.getElementById('save-btn-text').innerText = translations[currentLang].saveBtn;
+            document.getElementById('wa-btn-text').innerText = translations[currentLang].waBtn;
+            document.getElementById('fb-btn-text').innerText = translations[currentLang].fbBtn;
+            document.getElementById('ig-btn-text').innerText = translations[currentLang].igBtn;
+            document.getElementById('tt-btn-text').innerText = translations[currentLang].ttBtn;
+            document.getElementById('gps-btn-text').innerText = translations[currentLang].gpsBtn;
+            document.getElementById('modal-title').innerText = translations[currentLang].modalTitle;
+            document.getElementById('modal-desc').innerText = translations[currentLang].modalDesc;
+            
+            // Update Toggle Button Text based on font
+            const langToggle = document.getElementById('lang-toggle-text');
+            langToggle.innerText = translations[currentLang].langToggleText;
+            langToggle.style.fontFamily = currentLang === 'ar' ? "'Poppins', sans-serif" : "'Tajawal', sans-serif";
+        }
+
+
         // Generate QR Code dynamically pointing to the current page URL
         function initQRCode() {
             // Check if the QRCode library is completely loaded
@@ -243,29 +332,67 @@
 
             new QRCode(qrContainer, {
                 text: currentUrl,
-                width: 130,
-                height: 130,
-                colorDark : "#000000",
+                width: 160,
+                height: 160,
+                colorDark : "#0f172a",
                 colorLight : "#ffffff",
                 correctLevel : QRCode.CorrectLevel.H
             });
         }
 
-        // Use window.onload to ensure all external scripts (like qrcode.min.js) are fetched and ready
+        // Use window.onload to ensure all external scripts are fetched and ready
         window.addEventListener('load', initQRCode);
 
-        // Function to create and download vCard
+        // --- Modal Functions ---
+        function openQRModal() {
+            const modal = document.getElementById('qrModal');
+            const modalContent = document.getElementById('qrModalContent');
+            
+            // Show modal
+            modal.classList.remove('hidden');
+            
+            // Trigger animation
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeQRModal() {
+            const modal = document.getElementById('qrModal');
+            const modalContent = document.getElementById('qrModalContent');
+            
+            // Reverse animation
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            
+            // Hide modal after animation ends
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Close modal when clicking outside the content
+        document.getElementById('qrModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeQRModal();
+            }
+        });
+
+        // Function to create and download vCard (Dynamic Language Support)
         function downloadVCard() {
             // vCard Data
             const vcardData = 
 `BEGIN:VCARD
 VERSION:3.0
-FN:رحيم للمفاتيح
+FN:${translations[currentLang].mainTitle}
 ORG:RAHIM KEY
-TITLE:خبير برمجة ونسخ مفاتيح السيارات
+TITLE:${translations[currentLang].vcardTitle}
 TEL;TYPE=WORK,VOICE:0559695891
 URL:https://web.facebook.com/profile.php?id=100063619398517
-NOTE:خبير في نسخ، برمجة، وإصلاح جميع أنواع مفاتيح السيارات الذكية والمشفرة.
+NOTE:${translations[currentLang].vcardNote}
 END:VCARD`;
 
             // Create a Blob containing the vCard data
