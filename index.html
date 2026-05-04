@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -9,7 +10,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <!-- QRCode.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -70,11 +71,11 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .social-btn {
+        .hover-card {
             transition: all 0.3s ease;
         }
         
-        .social-btn:hover {
+        .hover-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.4);
         }
@@ -104,14 +105,14 @@
     <!-- Main Container -->
     <div class="glass-card w-full max-w-md rounded-3xl p-8 shadow-2xl relative overflow-hidden transition-all duration-300">
         
-        <!-- زر QR Code -->
-        <button onclick="openQRModal()" title="عرض رمز QR" class="absolute top-5 left-5 z-30 px-4 py-2 rounded-full bg-white/10 hover:bg-gold-500/20 border border-white/20 hover:border-gold-500/50 flex items-center justify-center gap-2 text-white hover:text-gold-400 transition-all shadow-lg hover:scale-105">
+        <!-- زر QR Code مع تثبيت الاتجاه -->
+        <button onclick="openQRModal()" dir="rtl" title="عرض رمز QR" class="absolute top-5 left-5 z-30 px-4 py-2 rounded-full bg-white/10 hover:bg-gold-500/20 border border-white/20 hover:border-gold-500/50 flex items-center justify-center gap-2 text-white hover:text-gold-400 transition-all shadow-lg hover:scale-105">
             <i class="fa-solid fa-qrcode text-lg"></i>
             <span id="qr-btn-text" class="text-xs font-bold mt-0.5">شارك البطاقة</span>
         </button>
 
-        <!-- زر تغيير اللغة -->
-        <button onclick="toggleLanguage()" title="تغيير اللغة" class="absolute top-5 right-5 z-30 px-4 py-2 rounded-full bg-white/10 hover:bg-blue-500/20 border border-white/20 hover:border-blue-500/50 flex items-center justify-center gap-2 text-white hover:text-blue-400 transition-all shadow-lg hover:scale-105">
+        <!-- زر تغيير اللغة مع تثبيت الاتجاه -->
+        <button onclick="toggleLanguage()" dir="rtl" title="تغيير اللغة" class="absolute top-5 right-5 z-30 px-4 py-2 rounded-full bg-white/10 hover:bg-blue-500/20 border border-white/20 hover:border-blue-500/50 flex items-center justify-center gap-2 text-white hover:text-blue-400 transition-all shadow-lg hover:scale-105">
             <i class="fa-solid fa-globe text-lg"></i>
             <span id="lang-toggle-text" class="text-xs font-bold mt-0.5" style="font-family: 'Poppins', sans-serif;">FR</span>
         </button>
@@ -150,8 +151,8 @@
                 خبير في <span class="text-gold-400 font-bold">نسخ</span>، <span class="text-gold-400 font-bold">برمجة</span>، وإصلاح جميع أنواع مفاتيح السيارات <span class="text-blue-300 font-bold">الذكية والمشفرة</span>.
             </p>
 
-            <!-- Quick Action Circular Buttons -->
-            <div class="flex items-center justify-center gap-6 w-full mb-6">
+            <!-- Quick Action Circular Buttons - تثبيت الاتجاه إلى اليمين -->
+            <div class="flex items-center justify-center gap-6 w-full mb-6" dir="rtl">
                 <!-- Phone -->
                 <div class="flex flex-col items-center gap-2">
                     <a href="tel:0559695891" title="اتصل بنا" class="circle-btn w-14 h-14 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-500 hover:bg-gold-500 hover:text-white shadow-lg hover:shadow-gold-500/40">
@@ -178,10 +179,10 @@
             </div>
         </div>
 
-        <!-- Action Buttons (2x2 Grid) -->
-        <div class="grid grid-cols-2 gap-4 relative z-10">
+        <!-- Action Buttons (2x2 Grid) - تثبيت الاتجاه إلى اليمين -->
+        <div class="grid grid-cols-2 gap-4 relative z-10" dir="rtl">
             <!-- Facebook -->
-            <a href="https://web.facebook.com/profile.php?id=100063619398517&locale=fr_FR" target="_blank" class="social-btn flex flex-col items-center justify-center gap-3 p-4 rounded-2xl bg-blue-500/10 border border-blue-500/30 hover:bg-blue-500/20 hover:border-blue-500 group text-white text-center">
+            <a href="https://web.facebook.com/profile.php?id=100063619398517&locale=fr_FR" target="_blank" class="hover-card flex flex-col items-center justify-center gap-3 p-4 rounded-2xl bg-blue-500/10 border border-blue-500/30 hover:bg-blue-500/20 hover:border-blue-500 group text-white text-center">
                 <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/30">
                     <i class="fa-brands fa-facebook-f text-2xl"></i>
                 </div>
@@ -189,7 +190,7 @@
             </a>
 
             <!-- Instagram -->
-            <a href="https://www.instagram.com/programation_cle_auto/" target="_blank" class="social-btn flex flex-col items-center justify-center gap-3 p-4 rounded-2xl bg-fuchsia-500/10 border border-fuchsia-500/30 hover:bg-fuchsia-500/20 hover:border-fuchsia-500 group text-white text-center">
+            <a href="https://www.instagram.com/programation_cle_auto/" target="_blank" class="hover-card flex flex-col items-center justify-center gap-3 p-4 rounded-2xl bg-fuchsia-500/10 border border-fuchsia-500/30 hover:bg-fuchsia-500/20 hover:border-fuchsia-500 group text-white text-center">
                 <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-fuchsia-500/30">
                     <i class="fa-brands fa-instagram text-2xl"></i>
                 </div>
@@ -197,7 +198,7 @@
             </a>
 
             <!-- TikTok -->
-            <a href="https://www.tiktok.com/@rahim_key?_r=1&_t=ZS-95ugPeCr9ph" target="_blank" class="social-btn flex flex-col items-center justify-center gap-3 p-4 rounded-2xl bg-pink-500/10 border border-pink-500/30 hover:bg-pink-500/20 hover:border-pink-500 group text-white text-center">
+            <a href="https://www.tiktok.com/@rahim_key?_r=1&_t=ZS-95ugPeCr9ph" target="_blank" class="hover-card flex flex-col items-center justify-center gap-3 p-4 rounded-2xl bg-pink-500/10 border border-pink-500/30 hover:bg-pink-500/20 hover:border-pink-500 group text-white text-center">
                 <div class="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500 to-pink-500 flex items-center justify-center text-white shadow-lg shadow-pink-500/30">
                     <i class="fa-brands fa-tiktok text-2xl"></i>
                 </div>
@@ -205,7 +206,7 @@
             </a>
 
             <!-- GPS Location -->
-            <a href="https://maps.app.goo.gl/vEGoAhwDB3a4mtoaA" target="_blank" class="social-btn flex flex-col items-center justify-center gap-3 p-4 rounded-2xl bg-red-500/10 border border-red-500/30 hover:bg-red-500/20 hover:border-red-500 group text-white text-center">
+            <a href="https://maps.app.goo.gl/vEGoAhwDB3a4mtoaA" target="_blank" class="hover-card flex flex-col items-center justify-center gap-3 p-4 rounded-2xl bg-red-500/10 border border-red-500/30 hover:bg-red-500/20 hover:border-red-500 group text-white text-center">
                 <div class="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center text-white shadow-lg shadow-red-500/30">
                     <i class="fa-solid fa-location-dot text-2xl"></i>
                 </div>
@@ -218,7 +219,7 @@
     <!-- QR Code Modal Overlay -->
     <div id="qrModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-slate-950/80 backdrop-blur-sm opacity-0 transition-opacity duration-300">
         <!-- Modal Content -->
-        <div id="qrModalContent" class="glass-card bg-[#0f172a] border border-gray-700 p-8 rounded-3xl shadow-2xl relative transform scale-95 transition-transform duration-300 max-w-sm w-[90%] flex flex-col items-center">
+        <div id="qrModalContent" class="glass-card bg-[#0f172a] border border-gray-700 p-8 rounded-3xl shadow-2xl relative transform scale-95 transition-transform duration-300 max-w-sm w-[90%] flex flex-col items-center" dir="rtl">
             
             <!-- Close Button -->
             <button onclick="closeQRModal()" class="absolute top-4 left-4 w-8 h-8 flex items-center justify-center rounded-full bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-colors">
@@ -286,7 +287,7 @@
         function toggleLanguage() {
             currentLang = currentLang === 'ar' ? 'fr' : 'ar';
             
-            // Update HTML Lang & Dir attributes
+            // Update HTML Lang & Dir attributes (Text direction adapts, layout is locked)
             document.documentElement.lang = currentLang;
             document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
 
